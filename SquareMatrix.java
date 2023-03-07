@@ -52,6 +52,12 @@ public class SquareMatrix {
 
     public void setColumn(double[] elements, int column) {
 
+        for (int i = 0; i < order; i++) {
+
+            this.elements[i][column - 1] = elements[i];
+
+        }
+
     }
 
     public void setAll(double[][] elements) {
@@ -170,13 +176,7 @@ public class SquareMatrix {
     // A matrix M is skew-symmetric when its transpose is equivalent to -M
     public boolean isSkewSymmetric() {
 
-        SquareMatrix clone = new SquareMatrix(order);
-
-        for (int i = 1; i <= order; i++) {
-            for (int j = 1; j <= order; j++) {
-                clone.set(this.get(i, j), i, j);
-            }
-        }
+        SquareMatrix clone = this.clone();
 
         clone.scalarMultiplication(-1);
 
@@ -328,5 +328,21 @@ public class SquareMatrix {
         }
 
         return true;
+    }
+
+    public SquareMatrix clone() {
+
+        SquareMatrix clone = new SquareMatrix(order);
+
+        for (int i = 1; i <= order; i++) {
+
+            for (int j = 1; j <= order; j++) {
+                clone.set(this.get(i, j), i, j);
+            }
+
+        }
+
+        return clone;
+
     }
 }

@@ -245,7 +245,7 @@ public class SquareMatrix {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < order; i++) {
-            sb.append("[");
+            sb.append("|");
             for (int j = 0; j < order; j++) {
 
                 sb.append(get(i + 1, j + 1));
@@ -254,7 +254,7 @@ public class SquareMatrix {
 
             }
 
-            sb.append("]");
+            sb.append("|");
             if (i < order)
                 sb.append("\n");
 

@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 
 public class SquareMatrix {
 
-    public double[][] elements;
+    public int[][] elements;
     public final int order;
 
     public SquareMatrix(int order) {
@@ -13,15 +13,15 @@ public class SquareMatrix {
             throw new RuntimeException("Enter a number equals or greater than 1");
 
         this.order = order;
-        elements = new double[order][order];
+        elements = new int[order][order];
     }
 
-    public SquareMatrix(double[][] elements) {
+    public SquareMatrix(int[][] elements) {
 
         if (!checkBidimensionalArray(elements))
             throw new RuntimeException("This is not a square bidimensional array");
 
-        this.elements = new double[elements.length][elements.length];
+        this.elements = new int[elements.length][elements.length];
         this.order = elements.length;
 
         for (int i = 0; i < elements.length; i++) {
@@ -33,7 +33,7 @@ public class SquareMatrix {
     }
 
     // Set the element in the given position
-    public void set(double element, int row, int column) {
+    public void set(int element, int row, int column) {
 
         if ((row > order || column > order) || (row <= 0 || column <= 0))
             throw new RuntimeException("Enter a row or column that exists");
@@ -42,7 +42,7 @@ public class SquareMatrix {
     }
 
     // Set elements in the given row
-    public void setRow(double[] elements, int row) {
+    public void setRow(int[] elements, int row) {
 
         if ((row > order || row <= 0) || elements.length > order)
             throw new RuntimeException("This row doesn't exists or this array length is not equal to the matrix order");
@@ -50,7 +50,7 @@ public class SquareMatrix {
         this.elements[row - 1] = elements;
     }
 
-    public void setColumn(double[] elements, int column) {
+    public void setColumn(int[] elements, int column) {
 
         for (int i = 0; i < order; i++) {
 
@@ -60,7 +60,7 @@ public class SquareMatrix {
 
     }
 
-    public void setAll(double[][] elements) {
+    public void setAll(int[][] elements) {
 
         if (elements.length != this.order)
             throw new RuntimeException("This bidimensional array is not of the same order of this matrix");
@@ -74,7 +74,7 @@ public class SquareMatrix {
     }
 
     // Get the element in the given position
-    public double get(int row, int column) {
+    public int get(int row, int column) {
 
         if ((row > order || column > order) || (row <= 0 || column <= 0))
             throw new RuntimeException("Enter a row or column that exists");
@@ -83,12 +83,12 @@ public class SquareMatrix {
     }
 
     // Checks if the matrix contains x
-    public boolean contains(double x) {
+    public boolean contains(int x) {
         return this.findFirst(x) != null;
     }
 
     // Return the position of the first occurency of x
-    public int[] findFirst(double x) {
+    public int[] findFirst(int x) {
         for (int i = 1; i <= order; i++) {
             for (int j = 1; j <= order; j++) {
                 if (this.get(i, j) == x) {
@@ -102,7 +102,7 @@ public class SquareMatrix {
     }
 
     // Return a list that contains the positions of all the occurrencies of x
-    public List<int[]> findAll(double x) {
+    public List<int[]> findAll(int x) {
 
         List<int[]> occurrencies = new ArrayList<>();
 
@@ -217,9 +217,9 @@ public class SquareMatrix {
     }
 
     // Calculates the cofactor of an element in this matrix
-    private double cofactor(int row, int column) {
+    private int cofactor(int row, int column) {
 
-        return Math.pow((-1), row + column) * this.minor(row, column).det();
+        return (int) ((int) Math.pow((-1), row + column) * this.minor(row, column).det());
 
     }
 
@@ -260,6 +260,8 @@ public class SquareMatrix {
 
         }
 
+
+
         return sb.toString();
 
     }
@@ -283,11 +285,11 @@ public class SquareMatrix {
 
     public void clear() {
 
-        this.elements = new double[order][order];
+        this.elements = new int[order][order];
 
     }
 
-    public void forEach(Consumer<Double> x) {
+    public void forEach(Consumer<Integer> x) {
 
         for (int i = 1; i <= order; i++) {
             for (int j = 1; j <= order; j++) {
@@ -296,9 +298,9 @@ public class SquareMatrix {
         }
     }
 
-    public double max() {
+    public int max() {
 
-        double max = get(1, 1);
+        int max = get(1, 1);
 
         for (int i = 1; i <= order; i++) {
             for (int j = 1; j <= order; j++) {
@@ -308,9 +310,9 @@ public class SquareMatrix {
         return max;
     }
 
-    public double min() {
+    public int min() {
 
-        double min = get(1, 1);
+        int min = get(1, 1);
 
         for (int i = 1; i <= order; i++) {
             for (int j = 1; j <= order; j++) {
@@ -320,7 +322,7 @@ public class SquareMatrix {
         return min;
     }
 
-    private boolean checkBidimensionalArray(double[][] m) {
+    private boolean checkBidimensionalArray(int[][] m) {
 
         for (int i = 0; i < m.length; i++) {
             if (m[i].length != m.length)
